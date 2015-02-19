@@ -14,13 +14,14 @@ import java.io.IOException;
 
 public class MainActivity extends ActionBarActivity {
 
-    private AudioWrapper mSample;
+    private AudioWrapper[] mAudioArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mSample = new AudioWrapper(getApplicationContext(), R.raw.sample);
+        mAudioArray = new AudioWrapper[1];
+        mAudioArray[0] = new AudioWrapper(getApplicationContext(), R.raw.sample);
     }
 
 
@@ -47,18 +48,23 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onImageClick(View v) {
+        // Start bumping animation for heart image
         v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_scaleup_anim));
 
-        if(mSample.isMusicPlaying())
+        // If the music is already playing stop it, else start it
+        // When music stops, it should reset back to start
+        // If there is an exception, recreate audio from the beginning
+        if(mAudioArray[0].isMusicPlaying())
             try{
-                mSample.stop();
+                mAudioArray[0].stop();
             }
             catch(IllegalStateException e){
-
+                mAudioArray[0].recreate(getApplicationContext());
             } catch (IOException e) {
                 e.printStackTrace();
+                mAudioArray[0].recreate(getApplicationContext());
             }
         else
-            mSample.play();
+            mAudioArray[0].play();
     }
 }
