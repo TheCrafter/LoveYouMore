@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -41,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Toast.makeText(getApplicationContext(), "Hey! I Love you <3", Toast.LENGTH_SHORT).show();
             return true;
         }
 
