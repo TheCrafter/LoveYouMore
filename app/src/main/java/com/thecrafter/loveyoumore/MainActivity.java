@@ -1,8 +1,6 @@
 package com.thecrafter.loveyoumore;
 
-import android.media.MediaPlayer;
-import android.renderscript.RSInvalidStateException;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -13,7 +11,7 @@ import android.widget.Toast;
 import java.io.IOException;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private AudioWrapper[] mAudioArray;
 
@@ -41,13 +39,18 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_lovemsg) {
             Toast.makeText(getApplicationContext(), "Hey! I Love you <3", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        else if(id == R.id.action_complimentmsg){
+            Toast.makeText(getApplicationContext(), "Ok, you are gorgeous!", Toast.LENGTH_SHORT).show();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 
     public void onImageClick(View v) {
         // Start bumping animation for heart image
