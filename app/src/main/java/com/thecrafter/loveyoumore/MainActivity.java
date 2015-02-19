@@ -14,15 +14,13 @@ import java.io.IOException;
 
 public class MainActivity extends ActionBarActivity {
 
-    private  MediaPlayer mediaPlayer;
-    private boolean mMusicPlaying;
+    private AudioWrapper mSample;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sample);
-        mMusicPlaying = false;
+        mSample = new AudioWrapper(getApplicationContext(), R.raw.sample);
     }
 
 
@@ -51,25 +49,16 @@ public class MainActivity extends ActionBarActivity {
     public void onImageClick(View v) {
         v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_scaleup_anim));
 
-        if(mMusicPlaying)
-        {
-            mediaPlayer.stop();
-
+        if(mSample.isMusicPlaying())
             try{
-                mediaPlayer.prepare();
-                mediaPlayer.seekTo(0);
+                mSample.stop();
             }
             catch(IllegalStateException e){
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
         else
-        {
-            mediaPlayer.start(); // no need to call prepare(); create() does that for you
-        }
-
-        mMusicPlaying = !mMusicPlaying;
+            mSample.play();
     }
 }
