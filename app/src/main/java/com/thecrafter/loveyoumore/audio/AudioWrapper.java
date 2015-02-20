@@ -1,4 +1,4 @@
-package com.thecrafter.loveyoumore;
+package com.thecrafter.loveyoumore.audio;
 
 import android.content.Context;
 import android.media.MediaPlayer;

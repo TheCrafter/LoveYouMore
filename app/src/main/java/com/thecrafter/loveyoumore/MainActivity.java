@@ -8,35 +8,30 @@ import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
-import java.io.IOException;
+import com.thecrafter.loveyoumore.audio.AudioWrapper;
+import com.thecrafter.loveyoumore.audio.AudioHandler;
+
 import java.util.Vector;
 
 
 public class MainActivity extends Activity {
 
-    private Vector<AudioWrapper> mAudioVector;
-    private int posInAudioVec;
-
-    private int getCurPlayingIndex(){
-        for(int i = 0; i < mAudioVector.size(); i++)
-            if(mAudioVector.elementAt(i).isMusicPlaying())
-                return i;
-
-        return -1;
-    }
+    private AudioHandler mAudioHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAudioVector = new Vector<AudioWrapper>();
+        // Create audio vector and fill it with sound resources
+        Vector<AudioWrapper> audioVector = new Vector<>();
 
-        mAudioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample0));
-        mAudioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample1));
-        mAudioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample2));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample0));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample1));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample2));
 
-        posInAudioVec = 0;
+        // Pass the vector to audio handler
+        mAudioHandler = new AudioHandler(audioVector, getApplicationContext());
     }
 
 
@@ -72,28 +67,7 @@ public class MainActivity extends Activity {
         // Start bumping animation for heart image
         v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_scaleup_anim));
 
-        // Update pos
-        if(posInAudioVec == 3)
-            posInAudioVec = 0;
-
-        // If the music is already playing stop it, else start it
-        // When music stops, it should reset back to start
-        // If there is an exception, recreate audio from the beginning
-        int playingIndex = getCurPlayingIndex();
-        if(playingIndex != -1){
-            try{
-                mAudioVector.elementAt(playingIndex).stop();
-            }
-            catch(IllegalStateException e){
-                mAudioVector.elementAt(playingIndex).recreate(getApplicationContext());
-            } catch (IOException e) {
-                e.printStackTrace();
-                mAudioVector.elementAt(playingIndex).recreate(getApplicationContext());
-            }
-        }
-        else{
-            mAudioVector.elementAt(posInAudioVec).play();
-            posInAudioVec++;
-        }
+        // Update music state
+        mAudioHandler.update();
     }
 }
