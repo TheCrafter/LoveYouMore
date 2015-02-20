@@ -19,6 +19,13 @@ public class AudioWrapper {
 
         mMediaPlayer = MediaPlayer.create(context, mResId);
         mMusicPlaying = false;
+
+        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mMusicPlaying = false;
+            }
+        });
     }
 
     public void play(){
