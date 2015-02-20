@@ -12,25 +12,12 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/heartMusic_img"
+        android:id="@+id/heart_img"
         android:src="@drawable/heart"
-        android:clickable="true"
-        android:onClick="onMusicHeartClick"
-        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="110dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/heartText_img"
-        android:src="@drawable/heart"
         android:clickable="true"
-        android:onClick="onTextHeartClick"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/heartMusic_img"
-        android:layout_alignStart="@+id/heartMusic_img"
-        android:layout_marginTop="110dp" />
+        android:onClick="onImageClick" />
 
 </RelativeLayout>
 
