@@ -15,12 +15,17 @@ public class MainActivity extends Activity {
 
     private AudioWrapper[] mAudioArray;
 
+    private Toast mToast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
         mAudioArray = new AudioWrapper[1];
         mAudioArray[0] = new AudioWrapper(getApplicationContext(), R.raw.sample);
+
+        mToast = Toast.makeText(getApplicationContext(), "Hey! I Love you <3", Toast.LENGTH_SHORT);
     }
 
 
@@ -52,7 +57,7 @@ public class MainActivity extends Activity {
     }
 
 
-    public void onImageClick(View v) {
+    public void onMusicHeartClick(View v) {
         // Start bumping animation for heart image
         v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_scaleup_anim));
 
@@ -71,5 +76,12 @@ public class MainActivity extends Activity {
             }
         else
             mAudioArray[0].play();
+    }
+
+    public void onTextHeartClick(View v) {
+        // Start bumping animation for heart image
+        v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_scaleup_anim));
+
+        mToast.show();
     }
 }
