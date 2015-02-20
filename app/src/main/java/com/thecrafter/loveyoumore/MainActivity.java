@@ -9,18 +9,34 @@ import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Vector;
 
 
 public class MainActivity extends Activity {
 
-    private AudioWrapper[] mAudioArray;
+    private Vector<AudioWrapper> mAudioVector;
+    private int posInAudioVec;
+
+    private int getCurPlayingIndex(){
+        for(int i = 0; i < mAudioVector.size(); i++)
+            if(mAudioVector.elementAt(i).isMusicPlaying())
+                return i;
+
+        return -1;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mAudioArray = new AudioWrapper[1];
-        mAudioArray[0] = new AudioWrapper(getApplicationContext(), R.raw.sample);
+
+        mAudioVector = new Vector<AudioWrapper>();
+
+        mAudioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample0));
+        mAudioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample1));
+        mAudioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample2));
+
+        posInAudioVec = 0;
     }
 
 
@@ -56,20 +72,28 @@ public class MainActivity extends Activity {
         // Start bumping animation for heart image
         v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_scaleup_anim));
 
+        // Update pos
+        if(posInAudioVec == 3)
+            posInAudioVec = 0;
+
         // If the music is already playing stop it, else start it
         // When music stops, it should reset back to start
         // If there is an exception, recreate audio from the beginning
-        if(mAudioArray[0].isMusicPlaying())
+        int playingIndex = getCurPlayingIndex();
+        if(playingIndex != -1){
             try{
-                mAudioArray[0].stop();
+                mAudioVector.elementAt(playingIndex).stop();
             }
             catch(IllegalStateException e){
-                mAudioArray[0].recreate(getApplicationContext());
+                mAudioVector.elementAt(playingIndex).recreate(getApplicationContext());
             } catch (IOException e) {
                 e.printStackTrace();
-                mAudioArray[0].recreate(getApplicationContext());
+                mAudioVector.elementAt(playingIndex).recreate(getApplicationContext());
             }
-        else
-            mAudioArray[0].play();
+        }
+        else{
+            mAudioVector.elementAt(posInAudioVec).play();
+            posInAudioVec++;
+        }
     }
 }
