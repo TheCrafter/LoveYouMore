@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="bg_pink" type="color">#ffff49ee</item>
+    <item name="bg_hard_pink" type="color">#ffff1351</item>
+
+</resources>

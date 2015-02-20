@@ -20,5 +20,3 @@
         android:onClick="onImageClick" />
 
 </RelativeLayout>
-
-    <!--android:background="@drawable/gradient_background" -->
