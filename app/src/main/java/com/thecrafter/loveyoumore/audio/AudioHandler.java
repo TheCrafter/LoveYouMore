@@ -4,29 +4,49 @@ import android.content.Context;
 
 import java.io.IOException;
 import java.util.Vector;
+import java.util.Random;
 
 /**
  * Created by TheCrafter on 20/2/2015.
  */
 public class AudioHandler {
 
+    // A vector with all sounds.
     private Vector<AudioWrapper> mAudioVector;
-    private int nextAudioIndex;
 
+    // Index in mAudioVector for the next audio to play.
+    private int mNextAudioIndex;
+
+    // Application context from the app that owns this AudioHandler.
     private Context mAppContext;
+
+
+    // Random generator to update randomly mNextAudioIndex.
+    private Random mRand;
+
 
     public AudioHandler(Vector<AudioWrapper> vec, Context context){
         this.mAudioVector = vec;
-        this.nextAudioIndex = 0;
         this.mAppContext = context;
+
+        mRand = new Random(System.currentTimeMillis());
+        mNextAudioIndex = 0;
     }
 
-    //TODO: Implement random chance for next audio here
+    private int getRandomInt(int min, int max){
+        return mRand.nextInt((max - min) + 1) + min;
+    }
+
+    //TODO: Make exclude an array, not just single numbers
     private void updateNextAudioIndex(){
-        if(nextAudioIndex == mAudioVector.size() - 1)
-            nextAudioIndex = 0;
-        else
-            nextAudioIndex++;
+        int nextIndex;
+
+        // Exclude the previously played audio
+        do{
+            nextIndex = getRandomInt(0, mAudioVector.size() - 1);
+        }while(nextIndex == mNextAudioIndex);
+
+        mNextAudioIndex = nextIndex;
     }
 
     private int getCurPlayingIndex(){
@@ -42,7 +62,7 @@ public class AudioHandler {
 
         // No music is playing so play next audio
         if(curPlayingIndex == -1){
-            mAudioVector.elementAt(nextAudioIndex).play();
+            mAudioVector.elementAt(mNextAudioIndex).play();
             updateNextAudioIndex();
         }
         // Stop the audio that is already playing
