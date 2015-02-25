@@ -26,9 +26,16 @@ public class MainActivity extends Activity {
         // Create audio vector and fill it with sound resources
         Vector<AudioWrapper> audioVector = new Vector<>();
 
-        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample0));
-        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample1));
-        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.sample2));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg1));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg2));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg3));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg4));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg5));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg6));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg7));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg8));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg9));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg10));
 
         // Pass the vector to audio handler
         mAudioHandler = new AudioHandler(audioVector, getApplicationContext());

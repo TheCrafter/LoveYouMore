@@ -25,6 +25,9 @@ proguard/
 # Log Files
 *.log
 
+# Resources
+/app/src/main/res/raw/
+
 ###########################
 #      Eclipse stuff      #
 ###########################
