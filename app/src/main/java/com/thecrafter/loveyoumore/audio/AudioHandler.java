@@ -17,9 +17,11 @@ public class AudioHandler {
     // Index in mAudioVector for the next audio to play.
     private int mNextAudioIndex;
 
+    private int[] mLastPlayedAudios;
+    private final int mLastPlayedAudiosSize = 3;
+
     // Application context from the app that owns this AudioHandler.
     private Context mAppContext;
-
 
     // Random generator to update randomly mNextAudioIndex.
     private Random mRand;
@@ -31,21 +33,42 @@ public class AudioHandler {
 
         mRand = new Random(System.currentTimeMillis());
         mNextAudioIndex = 0;
+
+        mLastPlayedAudios = new int[mLastPlayedAudiosSize];
+
+        for (int i = 0; i < mLastPlayedAudiosSize - 1; i++)
+            mLastPlayedAudios[i] = -1;
     }
 
     private int getRandomInt(int min, int max){
         return mRand.nextInt((max - min) + 1) + min;
     }
 
-    //TODO: Make exclude an array, not just single numbers
+    private void appendToLastPlayedAudios(int index){
+        for (int i = 0; i < mLastPlayedAudiosSize; i++)
+            if (i == mLastPlayedAudiosSize - 1)
+                mLastPlayedAudios[0] = index;
+            else
+                mLastPlayedAudios[i + 1] = mLastPlayedAudios[i];
+    }
+
+    private boolean existInLastPlayedAudios(int index){
+        for(int i = 0; i < mLastPlayedAudiosSize - 1; i++)
+            if (mLastPlayedAudios[i] == index)
+                return true;
+
+        return false;
+    }
+
     private void updateNextAudioIndex(){
         int nextIndex;
 
         // Exclude the previously played audio
         do{
             nextIndex = getRandomInt(0, mAudioVector.size() - 1);
-        }while(nextIndex == mNextAudioIndex);
+        }while(existInLastPlayedAudios(nextIndex));
 
+        appendToLastPlayedAudios(nextIndex);
         mNextAudioIndex = nextIndex;
     }
 
