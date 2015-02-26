@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Raise the scale -->
     <scale xmlns:android="http://schemas.android.com/apk/res/android"
         android:fromXScale = "0.5"
         android:fromYScale = "0.5"
@@ -11,6 +12,7 @@
         android:duration = "200">
     </scale>
 
+    <!-- Return scale to normal -->
     <scale xmlns:android="http://schemas.android.com/apk/res/android"
         android:startOffset="200"
         android:fromXScale = "1.5"
