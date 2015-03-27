@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array
+        name="msg_array">
+        <item>"I love you more than anything!"</item>
+        <item>"You mean the world to me."</item>
+        <item>"Exams are getting close. I bet you're gonna pass with flying colours."</item>
+        <item>"Goofy &lt;3"</item>
+        <item>"I love you more. Any objections? Yes? What is the name of this application?"</item>
+        <item>"Harry Potter &lt; Lord Of The Rings"</item>
+        <item>"Hey gorgeous! &lt;3"</item>
+        <item>"Hey! I love you &lt;3"</item>
+        <item>"It's easy. Set a destination and don't stop until you've reached it. You are certainly going to become a writer. I'm sure of it ;)"</item>
+        <item>"Thank you for being in my life! You are the best thing ever happened to me &lt;3"</item>
+        <item>"You are adorable. And smart. And beautiful. And sweet. Well.. You are PERFECT."</item>
+        <item>"Do NOT underestimate yourself. Be proud of who you are. Well, I AM proud of you anyway :)"</item>
+        <item>"I'm proud of having the privilege of calling you &quot;my girlfriend&quot;."</item>
+        <item>"Xazouli &lt;3"</item>
+        <item>"Stravouli &lt;3"</item>
+        <item>"What is your favorite movie (Harry Potter excluded)? Send me on facebook."</item>
+        <item>"Thelw na erthei kalokairi!!!"</item>
+        <item>"Good luck! For no reason :P"</item>
+        <item>"I try to create sympathy for my characters, then turn the monsters loose.
+            - Stephen King"</item>
+        <item>"It is our choices… that show what we truly are, far more than our abilities.
+            -  J. K. Rowling"</item>
+        <item>"Anything's possible if you've got enough nerve.
+            - J. K. Rowling"</item>
+        <item>"All we have to decide is what to do with the time that is given us.
+            - J. R. R. Tolkien"</item>
+        <item>"Courage is found in unlikely places.
+            - J. R. R. Tolkien"</item>
+        <item>"A pen is to me as a beak is to a hen.
+            - J. R. R. Tolkien"</item>
+    </string-array>
+</resources>

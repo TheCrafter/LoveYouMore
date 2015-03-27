@@ -18,11 +18,19 @@ import java.util.Vector;
 
 public class MainActivity extends Activity {
 
-    private String[] msgArray = {"HeyA", "HeyB", "HeyC", "HeyD", "HeyF", "HeyG"};
-    private RandomIntGenerator mRandomizer = new RandomIntGenerator(5, 4);
+    /** Array with all messages to appear on screen. Messages are loaded from xml.  */
+    private String[] mMsgArray;
 
+    /** Used to generate random indexes for mMsgArray. */
+    private RandomIntGenerator mRandGen;
+
+    /** A shared toast to show simple messages */
+    private Toast mToast;
+
+    /** Object to manage audio */
     private AudioHandler mAudioHandler;
 
+    /** If this is true, pressing the heart will play a sound, otherwise show message. */
     private boolean mMusicModeOn = true;
 
     @Override
@@ -47,9 +55,16 @@ public class MainActivity extends Activity {
         // Pass the vector to audio handler
         mAudioHandler = new AudioHandler(audioVector, getApplicationContext());
 
-        ImageView heartImage = (ImageView)findViewById(R.id.heart_img);
+        // Get message array
+        mMsgArray = getResources().getStringArray(R.array.msg_array);
+
+        // Init RandomIntGenerator
+        mRandGen = new RandomIntGenerator(
+                mMsgArray.length - 1,
+                ((mMsgArray.length - 1) * 2) / 3);
 
         // Set initial image
+        ImageView heartImage = (ImageView)findViewById(R.id.heart_img);
         heartImage.setImageResource(R.drawable.heart);
 
         heartImage.setOnLongClickListener(new View.OnLongClickListener() {
@@ -103,16 +118,21 @@ public class MainActivity extends Activity {
         // Start bumping animation for heart image
         v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_scaleup_anim));
 
+        // Check if we are on music mode or not
         if(mMusicModeOn){
             // Update music state
             mAudioHandler.update();
         }
         else{
             // Show the next message
-            Toast.makeText(getApplicationContext(), msgArray[mRandomizer.getNextInt()], Toast.LENGTH_SHORT).show();
+            if(mToast != null)
+                mToast.cancel();
+
+            mToast = Toast.makeText(getApplicationContext(), mMsgArray[mRandGen.getNextInt()], Toast.LENGTH_LONG);
+            mToast.show();
 
             // Update the next message
-            mRandomizer.updateNextInt();
+            mRandGen.updateNextInt();
         }
     }
 }
