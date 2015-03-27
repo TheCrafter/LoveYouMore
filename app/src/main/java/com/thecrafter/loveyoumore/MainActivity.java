@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.thecrafter.loveyoumore.audio.AudioWrapper;
@@ -17,6 +18,8 @@ import java.util.Vector;
 public class MainActivity extends Activity {
 
     private AudioHandler mAudioHandler;
+
+    private boolean mMusicModeOn = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,29 @@ public class MainActivity extends Activity {
 
         // Pass the vector to audio handler
         mAudioHandler = new AudioHandler(audioVector, getApplicationContext());
+
+        ImageView heartImage = (ImageView)findViewById(R.id.heart_img);
+
+        // Set initial image
+        heartImage.setImageResource(R.drawable.heart);
+
+        heartImage.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                ImageView heartImage = (ImageView)findViewById(R.id.heart_img);
+
+                // Change image
+                if(mMusicModeOn)
+                    heartImage.setImageResource(R.drawable.heart_purple);
+                else
+                    heartImage.setImageResource(R.drawable.heart);
+
+                // Change mode
+                mMusicModeOn = !mMusicModeOn;
+                return true;
+            }
+        });
     }
 
 
@@ -74,7 +100,12 @@ public class MainActivity extends Activity {
         // Start bumping animation for heart image
         v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_scaleup_anim));
 
-        // Update music state
-        mAudioHandler.update();
+        if(mMusicModeOn){
+            // Update music state
+            mAudioHandler.update();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Text mode on!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

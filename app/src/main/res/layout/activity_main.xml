@@ -17,6 +17,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:clickable="true"
-        android:onClick="onImageClick" />
+        android:onClick="onImageClick"
+        android:longClickable="true" />
 
 </RelativeLayout>
