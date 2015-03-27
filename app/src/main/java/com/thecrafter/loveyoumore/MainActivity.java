@@ -11,11 +11,15 @@ import android.widget.Toast;
 
 import com.thecrafter.loveyoumore.audio.AudioWrapper;
 import com.thecrafter.loveyoumore.audio.AudioHandler;
+import com.thecrafter.loveyoumore.util.RandomIntGenerator;
 
 import java.util.Vector;
 
 
 public class MainActivity extends Activity {
+
+    private String[] msgArray = {"HeyA", "HeyB", "HeyC", "HeyD", "HeyF", "HeyG"};
+    private RandomIntGenerator mRandomizer = new RandomIntGenerator(5, 4);
 
     private AudioHandler mAudioHandler;
 
@@ -52,10 +56,10 @@ public class MainActivity extends Activity {
             @Override
             public boolean onLongClick(View v) {
 
-                ImageView heartImage = (ImageView)findViewById(R.id.heart_img);
+                ImageView heartImage = (ImageView) findViewById(R.id.heart_img);
 
                 // Change image
-                if(mMusicModeOn)
+                if (mMusicModeOn)
                     heartImage.setImageResource(R.drawable.heart_purple);
                 else
                     heartImage.setImageResource(R.drawable.heart);
@@ -66,7 +70,6 @@ public class MainActivity extends Activity {
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,7 +108,11 @@ public class MainActivity extends Activity {
             mAudioHandler.update();
         }
         else{
-            Toast.makeText(getApplicationContext(), "Text mode on!", Toast.LENGTH_SHORT).show();
+            // Show the next message
+            Toast.makeText(getApplicationContext(), msgArray[mRandomizer.getNextInt()], Toast.LENGTH_SHORT).show();
+
+            // Update the next message
+            mRandomizer.updateNextInt();
         }
     }
 }
