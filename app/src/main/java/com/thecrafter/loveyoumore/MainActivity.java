@@ -3,14 +3,13 @@ package com.thecrafter.loveyoumore;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.thecrafter.loveyoumore.audio.AudioWrapper;
 import com.thecrafter.loveyoumore.audio.AudioHandler;
+import com.thecrafter.loveyoumore.audio.AudioWrapper;
 import com.thecrafter.loveyoumore.util.RandomIntGenerator;
 
 import java.util.Vector;
@@ -18,25 +17,36 @@ import java.util.Vector;
 
 public class MainActivity extends Activity {
 
+    /** Object to manage audio */
+    private AudioHandler mAudioHandler;
+
     /** Array with all messages to appear on screen. Messages are loaded from xml.  */
     private String[] mMsgArray;
 
     /** Used to generate random indexes for mMsgArray. */
-    private RandomIntGenerator mRandGen;
+    private RandomIntGenerator mMsgIndexGenerator;
 
     /** A shared toast to show simple messages */
     private Toast mToast;
 
-    /** Object to manage audio */
-    private AudioHandler mAudioHandler;
-
     /** If this is true, pressing the heart will play a sound, otherwise show message. */
     private boolean mMusicModeOn = true;
+
+    // Animations
+    /** Bumping animation */
+    private Animation mBumpAnimation;
+
+    /** Rotation animation */
+    private Animation mRotateAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Init animations
+        mBumpAnimation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_scaleup_anim);
+        mRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_rotate_anim);
 
         // Create audio vector and fill it with sound resources
         Vector<AudioWrapper> audioVector = new Vector<>();
@@ -59,7 +69,7 @@ public class MainActivity extends Activity {
         mMsgArray = getResources().getStringArray(R.array.msg_array);
 
         // Init RandomIntGenerator
-        mRandGen = new RandomIntGenerator(
+        mMsgIndexGenerator = new RandomIntGenerator(
                 mMsgArray.length - 1,
                 ((mMsgArray.length - 1) * 2) / 3);
 
@@ -86,53 +96,29 @@ public class MainActivity extends Activity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_lovemsg) {
-            Toast.makeText(getApplicationContext(), "Hey! I Love you <3", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        else if(id == R.id.action_complimentmsg){
-            Toast.makeText(getApplicationContext(), "Ok, you are gorgeous!", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
     public void onImageClick(View v) {
-        // Start bumping animation for heart image
-        v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_scaleup_anim));
 
         // Check if we are on music mode or not
         if(mMusicModeOn){
+            // Start bumping animation for heart image
+            v.startAnimation(mBumpAnimation);
+
             // Update music state
             mAudioHandler.update();
         }
         else{
+            // Start rotate animation for heart image
+            v.startAnimation(mRotateAnimation);
+
             // Show the next message
             if(mToast != null)
                 mToast.cancel();
 
-            mToast = Toast.makeText(getApplicationContext(), mMsgArray[mRandGen.getNextInt()], Toast.LENGTH_LONG);
+            mToast = Toast.makeText(getApplicationContext(), mMsgArray[mMsgIndexGenerator.getNextInt()], Toast.LENGTH_LONG);
             mToast.show();
 
             // Update the next message
-            mRandGen.updateNextInt();
+            mMsgIndexGenerator.updateNextInt();
         }
     }
 }
