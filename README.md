@@ -34,7 +34,9 @@ This application is a gift from me to my wonderful girlfriend, Ana!
 
 Purpose of LoveYouMore is to be an "interactive" gift card. You just
 have to press the heart icon and your recorded message or sound will
-start playing.
+start playing. Also you are able to write down some messages and after
+changing from "music mode" to "text message mdoe", pressing the heart 
+image will result in displaying randomly one of your messages.
 
 
 ## Build
@@ -52,6 +54,8 @@ msg1.ogg, msg2.ogg, ..., msg10.ogg in app\src\main\res\raw folder.
 1. You dont have to record in specific file format as long as you select
    a format that Android supports. Look it up on Android's documentation.
    Ogg format (as I've selected) is always a safe bet.
+
+2. You can add/remove messages directly from msg_array.xml
 
 ## Changelog
 
