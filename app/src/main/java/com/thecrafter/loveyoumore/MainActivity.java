@@ -1,7 +1,9 @@
 package com.thecrafter.loveyoumore;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -80,6 +82,10 @@ public class MainActivity extends Activity {
         heartImage.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+
+                // Vibrate for 50 millisecond
+                Vibrator vibe = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vibe.vibrate(50);
 
                 ImageView heartImage = (ImageView) findViewById(R.id.heart_img);
 
