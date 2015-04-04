@@ -2,6 +2,7 @@ package com.thecrafter.loveyoumore;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.thecrafter.loveyoumore.audio.AudioHandler;
 import com.thecrafter.loveyoumore.audio.AudioWrapper;
 import com.thecrafter.loveyoumore.util.RandomIntGenerator;
 
+import java.io.IOException;
 import java.util.Vector;
 
 
@@ -41,10 +43,16 @@ public class MainActivity extends Activity {
     /** Rotation animation */
     private Animation mRotateAnimation;
 
+    /** Media player for onClick sounds */
+    private MediaPlayer mClickSoundPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Init onClick Sound Player
+        mClickSoundPlayer = MediaPlayer.create(getApplicationContext(), R.raw.buttonclicksound);
 
         // Init animations
         mBumpAnimation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.heart_scaleup_anim);
@@ -123,6 +131,17 @@ public class MainActivity extends Activity {
             mAudioHandler.update();
         }
         else{
+            // Play a System Sound
+            mClickSoundPlayer.stop();
+            try {
+                mClickSoundPlayer.prepare();
+            }
+            catch (IOException e){
+                System.out.println(e);
+            }
+            mClickSoundPlayer.seekTo(0);
+            mClickSoundPlayer.start();
+
             // Start rotate animation for heart image
             v.startAnimation(mRotateAnimation);
 
