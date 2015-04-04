@@ -58,11 +58,10 @@ public class RandomIntGenerator {
      * @param index Index of audio file from mAudioVector to append.
      */
     private void appendToLastInts(int index){
-        for (int i = 0; i < mHistorySize; i++)
-            if (i == mHistorySize - 1)
-                mLastInts[0] = index;
-            else
-                mLastInts[i + 1] = mLastInts[i];
+        for (int i = mHistorySize - 1; i >= 1; i--)
+            mLastInts[i] = mLastInts[i - 1];
+
+        mLastInts[0] = index;
     }
 
     /**
