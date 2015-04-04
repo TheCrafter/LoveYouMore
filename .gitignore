@@ -26,7 +26,8 @@ proguard/
 *.log
 
 # Resources
-/app/src/main/res/raw/
+	# Audio message files
+/app/src/main/res/raw/msg*.ogg
 
 ###########################
 #      Eclipse stuff      #
