@@ -63,6 +63,16 @@ public class MainActivity extends Activity {
         audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg8));
         audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg9));
         audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg10));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg11));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg12));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg13));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg14));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg15));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg16));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg17));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg18));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg19));
+        audioVector.add(new AudioWrapper(getApplicationContext(), R.raw.msg20));
 
         // Pass the vector to audio handler
         mAudioHandler = new AudioHandler(audioVector, getApplicationContext());
