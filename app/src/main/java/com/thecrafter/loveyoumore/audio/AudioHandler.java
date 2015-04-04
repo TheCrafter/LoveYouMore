@@ -40,7 +40,7 @@ public class AudioHandler {
         this.mAudioVector = vec;
         this.mAppContext = context;
 
-        mRandomizer = new RandomIntGenerator(mAudioVector.size() - 1);
+        mRandomizer = new RandomIntGenerator(mAudioVector.size() - 1, 15);
     }
 
     /**
