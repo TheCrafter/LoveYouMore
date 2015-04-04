@@ -137,7 +137,7 @@ public class MainActivity extends Activity {
                 mClickSoundPlayer.prepare();
             }
             catch (IOException e){
-                System.out.println(e);
+                System.out.println(e.toString());
             }
             mClickSoundPlayer.seekTo(0);
             mClickSoundPlayer.start();
