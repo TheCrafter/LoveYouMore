@@ -63,9 +63,9 @@ msg1.ogg, msg2.ogg, ..., msg20.ogg in app\src\main\res\raw folder.
 
 ## Screenshots
 
-![Red Heart](https://raw.githubusercontent.com/TheCrafter/LoveYouMore/v1.1-dev/docs/Screenshots/red_heart.png)
-![Purple Heart](https://raw.githubusercontent.com/TheCrafter/LoveYouMore/v1.1-dev/docs/Screenshots/purple_heart.png)
-![Purple Heart with Message](https://raw.githubusercontent.com/TheCrafter/LoveYouMore/v1.1-dev/docs/Screenshots/purple_heart_with_message.png)
+![Red Heart](https://raw.githubusercontent.com/TheCrafter/LoveYouMore/master/docs/Screenshots/red_heart.png)
+![Purple Heart](https://raw.githubusercontent.com/TheCrafter/LoveYouMore/master/docs/Screenshots/purple_heart.png)
+![Purple Heart with Message](https://raw.githubusercontent.com/TheCrafter/LoveYouMore/master/docs/Screenshots/purple_heart_with_message.png)
 
 
 ## Changelog
