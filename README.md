@@ -57,6 +57,14 @@ msg1.ogg, msg2.ogg, ..., msg10.ogg in app\src\main\res\raw folder.
 
 2. You can add/remove messages directly from msg_array.xml
 
+
+## Screenshots
+
+![Red Heart](https://raw.githubusercontent.com/TheCrafter/LoveYouMore/v1.1-dev/docs/Screenshots/red_heart.png)
+![Purple Heart](https://raw.githubusercontent.com/TheCrafter/LoveYouMore/v1.1-dev/docs/Screenshots/purple_heart.png)
+![Purple Heart with Message](https://raw.githubusercontent.com/TheCrafter/LoveYouMore/v1.1-dev/docs/Screenshots/purple_heart_with_message.png)
+
+
 ## Changelog
 
 ### v1.1
