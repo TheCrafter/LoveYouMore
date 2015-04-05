@@ -1,5 +1,8 @@
 # LoveYouMore - v1.1
-Date: 28/3/2015
+
+Author: Vlachakis Dimitris
+
+Date: 5/4/2015
 
 
                              __/^\__   
@@ -44,9 +47,9 @@ image will result in displaying randomly one of your messages.
 To build the project without errors you have to add resources correctly.
 I left in place the png icons for the application but I removed the sounds.
 
-All you have to do is place 10 sounds (if you want more you just have
+All you have to do is place 20 sounds (if you want more you just have
 to make a small adjustments to the code) with names:
-msg1.ogg, msg2.ogg, ..., msg10.ogg in app\src\main\res\raw folder.
+msg1.ogg, msg2.ogg, ..., msg20.ogg in app\src\main\res\raw folder.
 
 
 ## Notes
@@ -71,6 +74,7 @@ msg1.ogg, msg2.ogg, ..., msg10.ogg in app\src\main\res\raw folder.
 
 - Minor design changes.
 - Added support for text messages, not only audio messages.
+- App now requires vibration privilege.
 
 ## Contact me
 
