@@ -89,7 +89,6 @@ public class MainActivity extends Activity {
         audioVector.add(new AudioWrapper(this, R.raw.msg19));
         audioVector.add(new AudioWrapper(this, R.raw.msg20));
 
-        /*
         Vector<AudioWrapper> audioVector2 = new Vector<>();
         audioVector2.add(new AudioWrapper(this, R.raw.msg21));
         audioVector2.add(new AudioWrapper(this, R.raw.msg22));
@@ -110,12 +109,10 @@ public class MainActivity extends Activity {
         audioVector2.add(new AudioWrapper(this, R.raw.msg37));
         audioVector2.add(new AudioWrapper(this, R.raw.msg38));
         audioVector2.add(new AudioWrapper(this, R.raw.msg39));
-        audioVector2.add(new AudioWrapper(this, R.raw.msg40));
-        */
 
         // Pass the vector to audio handlers
         mAudioHandler = new AudioHandler(audioVector, this);
-        //mAudioHandler2 = new AudioHandler(audioVector2, this);
+        mAudioHandler2 = new AudioHandler(audioVector2, this);
 
         // Get message array
         mMsgArray = getResources().getStringArray(R.array.msg_array);
@@ -176,7 +173,7 @@ public class MainActivity extends Activity {
                 v.startAnimation(mFadeAnimation);
 
                 // Update music state
-                //mAudioHandler2.update();
+                mAudioHandler2.update();
                 break;
             }
 
